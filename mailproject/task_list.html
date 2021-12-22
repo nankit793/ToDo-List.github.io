@@ -1,0 +1,179 @@
+{% extends 'maillapp/main.html' %}
+{% block editing %}
+<style>
+    ::-webkit-scrollbar{ display: none;  }    
+    .counts
+    {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 20px;
+        color: black;
+        font-family: 'Lobster', cursive;
+        margin-bottom: 30px;
+    }
+    .add-schedule
+    {
+        font-weight: 300;
+        padding: 10px;
+        font-size: 20px;
+        padding: 10px;
+        
+        width: fit-content;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid transparent;
+        background: #33ccff;
+        box-shadow: 1px 3px 5px #555;
+        border-radius: 4px;   margin-top:20px;  margin-bottom: 20px;
+    }
+    .add-schedule a {  
+        color:  white;
+        text-shadow: 1px 2px 4px black;
+        text-decoration: none;
+        padding: 10px;
+    }
+    .description{ display: flex;   overflow: scroll;
+ box-sizing: content-box;   } 
+    table { 
+  width: 100%; 
+  border-collapse: collapse; 
+    }
+ /* Zebra striping */
+tr:nth-of-type(even) { 
+    /* background: linear-gradient(to right, #ff99cc  0%, #33ccff 100%); */
+    background: transparent;
+    border-top: 0px;
+}
+th { 
+  background: #33ccff;
+  height: 40px; 
+  color: black; 
+  font-weight: bold;    
+}
+td, th { 
+  padding: 8px; 
+  text-align: left;
+  border: 1px solid transparent; 
+}
+.iconhead { text-align: center; } 
+.rowdata
+{
+    box-shadow: 1px 2px 6px 0px grey;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 5px;
+    height:  50px;
+    background: linear-gradient(to right, #33ccff 0%, #ff99cc 100%);
+}
+    .rowdata a{
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: darkblue;
+
+}
+
+.btn:hover { 
+            color: red;
+            transition: .4s;
+}
+ 
+.rowdata i{  display: flex; justify-content: center; }
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1000px)  {
+
+	/* Force table to not be like tables anymore */
+    
+.rowdata
+{
+    height: auto;    
+}
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr {  border: 1px solid #ccc; border-top: none; 
+}
+	td {
+		/* Behave  like a "row" */
+		position: relative;
+		padding-left: 50%;
+        text-align: center;
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+        padding-right: 10px; 
+		white-space: nowrap;
+	}
+	
+	td:nth-of-type(1):before { content: "Title"; }
+	td:nth-of-type(2):before { content: "Discription"; }
+	td:nth-of-type(3):before { content: "Completed"; }
+	td:nth-of-type(4):before { content: "Edit"; }
+	td:nth-of-type(5):before { content: "Remove"; }
+}
+           </style>
+{% endblock editing %}
+
+{% block currentpage %}HOME
+{% endblock currentpage %}
+
+{% block body %}
+<div class="add-schedule" >
+<i ><a class="fa fa-paper-plane"href="create/"> <span style="font-family:'Bebas Neue', cursive;" > Add Schedule </span></a></i>
+</div>
+<div class="counts"><p>
+    {% if count == 0 %}<p>Congo!! You do not have any incompleted Tasks</p> {% else %}<p>you have <span style="color: aqua; font-size: 30px;" > {{count}}</span> tasks Incompleted right now!</p> {% endif %}
+</div> 
+<div class="table">
+<table style="font-family: 'Fira Sans Condensed', sans-serif; " >
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th >Discription</th>
+        <th class="iconhead" >Completed</th>
+        <th class="iconhead" >Edit</th>
+        <th class="iconhead">Remove</th>
+    </tr>
+</thead>
+    <tr>
+        {% for task in object_list %}
+    <div >    
+    <tr class="rowdata">
+        <td><span class="description" >{{task.title}}</span></td>
+        <td ><span class="description" > {{task.desc}} </span></td>
+        {% if task.complete == True %}
+        <td> <i class="fa fa-check-circle" style="color:blue"></td></i></p> 
+        {% else %} <td><p><i class="fa fa-times-circle" style="color:red"></i></p> </td>
+        {% endif %} 
+        <td><a href="task-update/{{task.id}}"><i  class="btn fa fa-edit"></i></></a></td>
+        <td><a href="task-delete/{{task.id}}"><i class="btn fa fa-trash"></i></a></td>
+    </tr>
+    </div>
+    {% empty %}
+    <h1>EMPTY NOW</h1>
+    {%endfor%}
+    </tr>
+
+</table>
+{% endblock body %}
+</div>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Never Be Late </title>
+    <!-- meta tags  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- bootstrap  -->
+    <!-- icons  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- fonts  -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans+Condensed&family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lobster&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans+Condensed&family=Lobster&display=swap"
+        rel="stylesheet">
+
+    {% block editing %}
+
+    {% endblock editing %}
+
+    <style>
+        body{
+            background-color: aliceblue;
+
+        }
+.fullbody
+        {
+            overflow-x: hidden;
+        }
+        .slogan a{ text-decoration: none; color: black;}
+        *{
+           padding: 0%; margin: 0%;
+        }
+        .container {
+            align-items: center;
+            padding: 10px;
+        }
+
+        .navbar {
+            font-family: 'Bebas Neue', cursive;
+            letter-spacing: 1px;
+            padding: 10px;
+            display: flex;
+            height: 40px;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to right, #33ccff 0%, #ff99cc 100%);
+        }
+        .navbar a{ text-decoration: none; color: black; font-size: 18px; }
+        .navbar ul 
+        {
+            display: flex;
+        }
+        .navbar ul li {  list-style-type: none; padding-left: 15px; }
+        .barsmenu, .crossmenu{  display: none; font-size: 10px; } 
+        
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    .navbar ul 
+    {
+        text-align: center;
+        transition: .7s ease-out;
+        display: block;
+        position: relative;
+        right: -100%;
+        top: 0%; 
+        width: 50%;
+        background-color: cornflowerblue;
+        height: 9999px;
+        position: fixed;
+        z-index: 1;
+
+    }
+    .navbar a:hover{  color: #33ccff; }
+    .navbar { 
+        display: block;
+        align-items: center;
+        display: flex;
+    }
+    .navbar ul li:first-child{ padding-top: 200px;  }
+    .navbar ul li a{ margin: 10px; font-size: 2.5vh}
+    .barsmenu{  display: block; z-index: 1;  } 
+
+    .crossmenu { display: block;  position: absolute; right: 4%; top: 0%;  } 
+    #checked:checked ~ ul {  right: 0%    }   
+    .navbar ul li , .logo {
+            font-size: 17px;
+            padding: 10px 10px;      }  
+    
+}
+    </style>
+</head>
+
+<body>
+    <div class="fullbody">
+    <div class = "navbar" >
+        <p class='slogan'> <a href="{% url 'app_pge' %}"> ToDo-App </a>| {% block currentpage %}{% endblock currentpage %} </P> 
+        <nav class="nav">           
+            <input type="checkbox" style="display: none;" id="checked">
+            <label class="barsmenu" for="checked" ><i style="font-size: 45px; " class="icon fa fa-bars"></i></label>        
+            <ul>
+                <li> <a href=""> Developer </a></li> 
+                <li><a href="">About Project</a></li>  
+                <li><a href=""> Research Paper</a></li> 
+                <label class="crossmenu" for="checked" ><i style="font-size: 4em; " class="icon fa fa-close"></i></label>   <br>
+            </ul>
+        </nav>
+    </div>
+
+    {% block navbar %}
+
+    {% endblock navbar %}
+    <div class="container">
+
+        {% block body %}
+
+        {%endblock body%}
+
+    </div>
+</div>
+</body>
+
+</html>

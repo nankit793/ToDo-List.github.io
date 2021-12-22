@@ -1,0 +1,76 @@
+{% extends 'maillapp/main.html' %}
+
+{% block editing %}
+<style>
+    * {
+        text-align: center;
+    }
+
+    .container form{
+        margin-top: 20px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    #id_title {
+        font-size: 15px;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #33ccff;
+    }
+
+    #id_title:hover,
+    #id_desc:hover {
+        border: 1px solid #ff99cc;
+    }
+
+    #id_desc {
+        font-size: 15px;
+        padding: 10px;
+        border: 1px solid #33ccff;
+        width: 80%;
+    }
+    #id_complete
+
+    {
+         
+        margin-bottom: 20px;
+}
+    .heading {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: black;
+        font-size: 25px;
+    }
+
+    .btn:hover {
+        background: #ff99cc;
+        transition: .3s;
+    }
+
+    .btn {
+        padding: 10px 20px 10px 20px;
+        cursor: pointer;
+        color: black;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border-radius: 5px;
+        border: .1px solid grey;
+        box-shadow: 1px 2px 4px grey;
+        font-size: 15px;
+        background: #33ccff
+    }
+    .container
+    {
+        text-align: center;
+    }
+</style>
+
+{% endblock editing %}
+{% block currentpage %}Create & Edit{% endblock currentpage %}
+{% block body %}
+<h1 class='heading'>Create Your schedule</h1>
+<div class="container">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}} <br>
+        <input class="btn" type="submit">
+    </form>
+</div>
+{% endblock body %}

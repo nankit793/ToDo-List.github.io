@@ -1,0 +1,39 @@
+{% extends 'maillapp/main.html' %}
+{% block editing %}
+<style>    
+    .btn:hover {
+        background: #ff99cc;
+        transition: .3s;
+    }
+    .btn {
+        padding: 10px 20px 10px 20px;
+        cursor: pointer;
+        color: black;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        border-radius: 5px;
+        border: .1px solid grey;
+        box-shadow: 1px 2px 4px grey;
+        font-size: 15px;
+        background: #33ccff;
+        margin-top: 20px;
+    }
+    .completed{ font-family: 'Lobster', cursive; font-size: 20px;
+    }
+    .task { color: #33ccff; }    
+    .attribute{ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin-top: 20px;  }
+
+</style>
+{% endblock editing %}
+{% block body %}
+
+    {% if task.complete == False %}<p class='completed' >You did not complete this task! Sure delete it?</p>{% else %}<p class='completed' >No! Worries you have already completed this task</p> {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <p class="attribute" >Task: <span class="task" >{{task.title}}</span></p>
+        <p class="attribute" >Description: <span class="task" >{{task.desc}}</span></p>
+        <p class="attribute">Completed: <span class="task" >{{task.complete}}</span></p>
+    
+        <input class='btn' type="submit" value="Delete">
+    </form>
+{% endblock body %} 
+{% block currentpage %}Delete{% endblock currentpage %}
